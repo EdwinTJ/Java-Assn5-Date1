@@ -1,3 +1,4 @@
+
 /**
  * Assignment 5 for CS 1410
  * This program demonstrates the use of the GregorianDate and JulianDate classes
@@ -161,37 +162,102 @@ class GregorianDate{
     private int month;
     private int day;
 
-    public int GregorianDate(int year, int month, int day){
-        return year + month + day;
+    public  GregorianDate(){
+        day = 3;
+        month = 4;
+        year = 2021;
 
     }
+     public GregorianDate( int year, int month, int day){
+         this.year=year;
+         this.month=month;
+         this.day=day;
 
-    public int getYear() {
-        return year;
+     }
+
+     public void addDays(int days){
+        return;
+     }
+
+    public void subtractDays(int days){
+        return;
     }
 
-    public int getMonth() {
+    public boolean isLeapYear(){
+        if (year%4==0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void printShortDate(){
+        return;
+    }
+
+    public void printLongDate(){
+        return;
+    }
+
+    public String getMonthName(){
+        if(month== 1){
+            return "January";
+        }
+        else if(month == 2){
+            return "Febraury";
+        }
+        else if(month == 3){
+            return "March";
+        }
+        else if(month == 4){
+            return "April";
+        }
+        else if(month == 5){
+            return "May";
+        }
+        else if(month == 6){
+            return "June";
+        }
+        else if(month == 7){
+            return "July";
+        }
+        else if(month == 8){
+            return "August";
+        }
+        else if(month == 9){
+            return "September";
+        }
+        else if(month == 10){
+            return "October";
+        }
+        else if(month == 11){
+            return "November";
+        }
+        else {
+            return "December";
+        }
+    }
+
+
+    public int getMonth(){
         return month;
     }
 
-    public String getMonthName(String name){
-        return name;
+    public int getYear(){
+        return year;
     }
 
     public int getDayOfMonth(){
         return day;
     }
 
-    public boolean isLeapYear(){
-        return false;
+    public int getNumberOfDaysInMonth(int year, int month){
+        return year;
     }
 
-    public int subtractDays(){
-        return day;
-    }
-
-    public int addDays(){
-        return day;
+    public int getNumberOfDaysInYear(int year){
+        return year;
     }
 
 
@@ -202,21 +268,85 @@ class JulianDate{
     private int month;
     private int day;
 
-    public int JulianDate(int year, int month, int day){
-        return year + month + day;
+    public JulianDate(){
+        day = 3;
+        month = 4;
+        year = 2021;
     }
 
-    public int getYear() {
-        return year;
+    public JulianDate(int year, int month, int day){
+        this.year=year;
+        this.month=month;
+        this.day=day;
     }
 
-    public int getMonth() {
+    public int calculateMiltoDays(){
+        int days = (int) (719164 / (1000*60*60*24));
+        return days;
+    }
+
+    public void addDays(int days){
+        return;
+    }
+
+    public void subtractDays(int days){
+        return;
+    }
+
+    public void printShortDate(){
+        return;
+    }
+
+    public void printLongDate(){
+        System.out.print(getMonthName()+" "+day+", "+year);
+
+    }
+
+    public String getMonthName(){
+        if(month== 1){
+            return "January";
+        }
+        else if(month == 2){
+            return "February";
+        }
+        else if(month == 3){
+            return "March";
+        }
+        else if(month == 4){
+            return "April";
+        }
+        else if(month == 5){
+            return "May";
+        }
+        else if(month == 6){
+            return "June";
+        }
+        else if(month == 7){
+            return "July";
+        }
+        else if(month == 8){
+            return "August";
+        }
+        else if(month == 9){
+            return "September";
+        }
+        else if(month == 10){
+            return "October";
+        }
+        else if(month == 11){
+            return "November";
+        }
+        else {
+            return "December";
+        }
+    }
+
+    public int getMonth(){
         return month;
     }
 
-    public String getMonthName(int month){
-        String Smonth = String.valueOf(month);
-        return Smonth;
+    public int getYear(){
+        return year;
     }
 
     public int getDayOfMonth(){
@@ -224,15 +354,21 @@ class JulianDate{
     }
 
     public boolean isLeapYear(){
-        return false;
+        if (year%4==0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
-    public int subtractDays(){
-        return day;
+    public int getNumberOfDaysInMonth(int year, int month){
+        return month;
     }
 
-    public int addDays(){
-        return day;
+    public int getNumberOfDaysInYear(int year){
+        return year;
     }
+
 
 }
