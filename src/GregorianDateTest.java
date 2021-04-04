@@ -7,8 +7,6 @@ import java.util.GregorianCalendar;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GregorianDateTest {
-
-
     /**
      * @brief This test verifies that the default constructor successfully sets the current day, month, and year
      */

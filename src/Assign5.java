@@ -1,3 +1,7 @@
+import java.security.InvalidParameterException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Assignment 5 for CS 1410
  * This program demonstrates the use of the GregorianDate and JulianDate classes
@@ -5,6 +9,7 @@
  * @author James Dean Mathias
  * Hello From github
  */
+
 public class Assign5 {
     public static void main(String[] args) {
 
@@ -157,83 +162,5 @@ public class Assign5 {
 
 }
 
-class GregorianDate{
-    private int year;
-    private int month;
-    private int day;
-
-    public int GregorianDate(int year, int month, int day){
-        return year + month + day;
-
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public String getMonthName(String name){
-        return name;
-    }
-
-    public int getDayOfMonth(){
-        return day;
-    }
-
-    public boolean isLeapYear(){
-        return false;
-    }
-
-    public int subtractDays(){
-        return day;
-    }
-
-    public int addDays(){
-        return day;
-    }
 
 
-}
-
-class JulianDate{
-    private int year;
-    private int month;
-    private int day;
-
-    public int JulianDate(int year, int month, int day){
-        return year + month + day;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public String getMonthName(int month){
-        String Smonth = String.valueOf(month);
-        return Smonth;
-    }
-
-    public int getDayOfMonth(){
-        return day;
-    }
-
-    public boolean isLeapYear(){
-        return false;
-    }
-
-    public int subtractDays(){
-        return day;
-    }
-
-    public int addDays(){
-        return day;
-    }
-
-}
