@@ -6,26 +6,25 @@ class JulianDate{
     private int startingYear = 1;
     private int startingMonth = 1;
 
+    int[] daysNormalYear = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int[] daysLeapYear = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
     public JulianDate() {
-        this.day = 1;
+        this.day = 0;
         this.month = 1;
         this.year = 1;
 
-
-        this.addDays(719162);
-
-        System.out.println(this.getMonth() + "/" + this.getDayOfMonth() + "/" + this.getYear());
+        this.addDays(719164);
 
         long currentTimeMillis = System.currentTimeMillis();
+        long currentTimeMillisOffset = java.util.TimeZone.getDefault().getRawOffset();
+
         long currentDays = 0;
         currentDays =  (currentTimeMillis) / (1000 * 60 * 60 *24);
         this.addDays((int)currentDays);
 
-        long currentTimeMillisOffset = java.util.TimeZone.getDefault().getRawOffset();
         currentDays =  (currentTimeMillisOffset) / (1000 * 60 * 60 *24);
         this.addDays((int)currentDays);
-
-        System.out.println(this.getMonth() + "/" + this.getDayOfMonth() + "/" + this.getYear());
     }
 
     public JulianDate(int year, int month, int day){
@@ -54,21 +53,51 @@ class JulianDate{
         System.out.println(this.getMonthName() + " " + this.getDayOfMonth() + " " + this.getYear());
     }
 
+
+
     public void addDays(int increment) {
-        int days = this.getDays() + increment;
-        this.calculateDayMonthYear(days);
+        for(int i = 0; i < increment; i++){
+            int numberOfDays = this.numberOfDaysInMonth();
+            this.day = this.day + 1;
+
+            if(this.day > numberOfDays){
+                this.day = 1;
+                this.month = this.month + 1;
+            }
+
+            if(this.month == 13){
+                this.month = 1;
+                this.year = this.year + 1;
+            };
+        }
     }
 
     public void subtractDays(int increment){
-        int days = this.getDays() - increment;
-        this.calculateDayMonthYear(days);
+        for(int i = 0; i < increment; i++){
+
+            this.day = this.day - 1;
+
+            if(this.day == 0){
+                this.month = this.month - 1;
+
+                if(this.month == 0){
+                    this.month = 12;
+                    this.year = this.year - 1;
+                };
+
+                int numberOfDays = this.numberOfDaysInMonth();
+                this.day = numberOfDays;
+            }
+        }
     }
 
-    public int getDays() {
-        int temp = calculateMonthDays(this.month, this.year);
-        int days = calculateYearDays(this.year);
-        days += temp;
-        return days + this.day;
+    public int numberOfDaysInMonth (){
+        if(this.isLeapYear()){
+            return this.daysLeapYear[this.month];
+        }
+        else {
+            return this.daysNormalYear[this.month];
+        }
     }
 
     public boolean isLeapYear(){
@@ -77,75 +106,7 @@ class JulianDate{
         else
             return  false;
     }
-
-    private void calculateDayMonthYear(int days)
-    {
-        int decrement = daysInYear(this.startingYear);
-        while (days > decrement) {
-            days -= decrement;
-            decrement = daysInYear(++this.startingYear);
-        }
-
-        int month = 1;
-        decrement = daysInMonth(month, this.startingYear);
-        while (days > decrement) {
-            days -= decrement;
-            decrement = daysInMonth(++month, this.startingYear);
-        }
-
-        this.month = month;
-        this.day = days;
-        this.year = this.startingYear;
-    }
-
-    private int daysInMonth(int month, int year) {
-        int[] days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-        if (month == 2) {
-            if (daysInYear(year) > 365) {
-                return days[month - 1] + 1;
-            }
-        }
-
-        return days[month - 1];
-    }
-
-    private int daysInYear(int year) {
-        int days = 365;
-
-        if ((year % 4) == 0) {
-            if ((year % 100) == 0) {
-                if ((year % 400) == 0) {
-                    days++;
-                }
-            } else {
-                days++;
-            }
-        }
-        return days;
-    }
-
-    private int calculateYearDays(int year) {
-        int days = 0;
-
-        for (int i = this.startingYear; i < year; i++) {
-            days += daysInYear(i);
-        }
-
-        return days;
-    }
-
-    private int calculateMonthDays(int month, int year) {
-        int days = 0;
-
-        for (int i = this.startingMonth; i < month; i++) {
-            days += daysInMonth(i, year);
-        }
-
-        return days;
-    }
-
-    public String getMonthName(){
+       public String getMonthName(){
 
         if (this.month == 1) {
             return "January";
